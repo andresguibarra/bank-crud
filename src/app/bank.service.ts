@@ -23,9 +23,18 @@ export class BankService {
   constructor(private httpClient: HttpClient) {}
 
   getFinancialProducts(): Observable<FinancialProduct[]> {
-    return this.httpClient.get<FinancialProduct[]>(
-      this.baseUrl + "/bp/products",
-      { headers: this.headers }
-    ).pipe(tap(console.log));
+    return this.httpClient
+      .get<FinancialProduct[]>(this.baseUrl + "/bp/products", {
+        headers: this.headers
+      })
+      .pipe(tap(console.log));
+  }
+
+  updateProduct(value: any) {
+    return this.httpClient
+      .post<FinancialProduct[]>(this.baseUrl + "/bp/products", value, {
+        headers: this.headers
+      })
+      .pipe(tap(console.log));
   }
 }

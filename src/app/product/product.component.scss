@@ -1,0 +1,51 @@
+.product-section {
+  width: 100%;
+}
+
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-weight: bold;
+  }
+  input {
+    width: 200px;
+    padding: 7px 0;
+    &.ng-invalid.ng-touched{
+      
+      border: 1px solid red;
+      border-radius: 4px;
+    }
+  }
+  div {
+    width: 200px;
+  }
+  span {
+    color: red;
+  }
+}
+
+.action-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  button {
+    padding: 15px 20px;
+    border: none;
+    border-radius: 4px;
+    &.reset {
+      background-color: lightgray;
+    }
+    &.send {
+      background-color: rgb(236, 190, 91);
+    }
+  }
+}

@@ -1,30 +1,94 @@
 <section class="product-section">
   <h2>Formulario de registro</h2>
   <hr />
-  <form action="">
-    <div class="field">
-      <label for="">Id</label>
-      <input type="text" />
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-fields">
+      <div class="field">
+        <label for="id">ID</label>
+        <input type="text" id="id" formControlName="id" />
+        <div *ngIf="productForm.get('id')?.touched">
+          <span *ngIf="productForm.get('id')?.errors?.['required']"
+            >ID no válido.</span
+          >
+          <span *ngIf="productForm.get('id')?.errors?.['minlength']"
+            >El ID debe tener al menos 3 caracteres.</span
+          >
+          <span *ngIf="productForm.get('id')?.errors?.['maxlength']"
+            >El ID no debe exceder los 10 caracteres.</span
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="name">Nombre</label>
+        <input type="text" id="name" formControlName="name" />
+        <div *ngIf="productForm.get('name')?.touched">
+          <span *ngIf="productForm.get('name')?.errors?.['required']"
+            >El Nombre es requerido.</span
+          >
+          <span *ngIf="productForm.get('name')?.errors?.['minlength']"
+            >El Nombre debe tener al menos 5 caracteres.</span
+          >
+          <span *ngIf="productForm.get('name')?.errors?.['maxlength']"
+            >El Nombre no debe exceder los 100 caracteres.</span
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="description">Descripción</label>
+        <input type="text" id="description" formControlName="description" />
+        <div *ngIf="productForm.get('description')?.touched">
+          <span *ngIf="productForm.get('description')?.errors?.['required']"
+            >La Descripción es requerida.</span
+          >
+          <span *ngIf="productForm.get('description')?.errors?.['minlength']"
+            >La Descripción debe tener al menos 1 caracter.</span
+          >
+          <span *ngIf="productForm.get('description')?.errors?.['maxlength']"
+            >La Descripción no debe exceder los 100 caracteres.</span
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="logo">Logo</label>
+        <input type="text" id="logo" formControlName="logo" />
+        <div *ngIf="productForm.get('logo')?.touched">
+          <span *ngIf="productForm.get('logo')?.errors?.['required']"
+            >El Logo es requerido.</span
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="date_release">Fecha Liberación</label>
+        <input type="date" id="date_release" formControlName="date_release" />
+        <div *ngIf="productForm.get('date_release')?.touched">
+          <span *ngIf="productForm.get('date_release')?.errors?.['required']"
+            >La Fecha de liberación es requerida.</span
+          >
+          <span *ngIf="productForm.get('date_release')?.errors?.['dateMinimum']"
+            >La Fecha debe ser hoy o en el futuro.</span
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="date_revision">Fecha Revisión</label>
+        <input type="date" id="date_revision" formControlName="date_revision" />
+        <div *ngIf="productForm.get('date_revision')?.touched">
+          <span *ngIf="productForm.get('date_revision')?.errors?.['required']"
+            >La Fecha de revisión es requerida.</span
+          >
+          <span *ngIf="productForm.getError('dateMismatch')"
+            >La Fecha de revisión debe ser exactamente un año después de la
+            fecha de liberación.</span
+          >
+        </div>
+      </div>
+      {{ productForm.getError("dateMismatch") }}
     </div>
-    <div class="field">
-      <label for="">Nombre</label>
-      <input type="text" />
-    </div>
-    <div class="field">
-      <label for="">Descripción</label>
-      <input type="text" />
-    </div>
-    <div class="field">
-      <label for="">Logo</label>
-      <input type="text" />
-    </div>
-    <div class="field">
-      <label for="">Fecha Liberación</label>
-      <input type="text" />
-    </div>
-    <div class="field">
-      <label for="">Fecha Revisión</label>
-      <input type="text" />
+    <div class="action-buttons">
+      <button class="reset" type="button" (click)="onReset()">Reiniciar</button>
+      <button [disabled]="productForm.invalid" class="send" type="submit">
+        Enviar
+      </button>
     </div>
   </form>
 </section>
