@@ -1,0 +1,32 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+  .add {
+    padding: 10px 20px;
+    background-color: rgb(236, 190, 91);
+    border: none;
+    border-radius: 4px;
+  }
+  input {
+    border: 1px solid gray;
+    border-radius: 4px;
+  }
+}
+
+table {
+  width: 100%;
+  td {
+    padding: 10px 0;
+  }
+  th {
+    text-align: left;
+  }
+}
+
+.ellipsis-vertical {
+  cursor: pointer;
+  fill: gray;
+  color: gray;
+}

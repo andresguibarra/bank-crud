@@ -1,0 +1,39 @@
+<div class="toolbar">
+  <input placeholder="Search..." />
+  <button class="add" type="button" (click)="onAdd()">Agregar</button>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Nombre del producto</th>
+      <th>Descripción</th>
+      <th>Fecha de liberación</th>
+      <th>Fecha de reestructuración</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of financialProducts">
+      <td>
+        <img
+          *ngIf="row.logo | validateUrl"
+          [src]="row.logo"
+          alt="Logo"
+          width="30"
+        />
+      </td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.description }}</td>
+      <td>{{ row.date_release | date }}</td>
+      <td>{{ row.date_revision | date }}</td>
+      <td>
+        <img
+          src="../assets/ellipsis-vertical.svg"
+          height="20px"
+          class="ellipsis-vertical"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>

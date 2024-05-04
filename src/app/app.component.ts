@@ -26,4 +26,8 @@ export class AppComponent implements OnInit {
         (financialProducts) => (this.financialProducts = financialProducts)
       );
   }
+
+  onAdd(): void {
+    
+  }
 }
