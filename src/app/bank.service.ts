@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 
 export type FinancialProduct = {
   id: string;
@@ -26,6 +26,6 @@ export class BankService {
     return this.httpClient.get<FinancialProduct[]>(
       this.baseUrl + "/bp/products",
       { headers: this.headers }
-    );
+    ).pipe(tap(console.log));
   }
 }
