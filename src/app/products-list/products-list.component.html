@@ -14,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of financialProducts">
+    <tr *ngFor="let row of financialProducts; let i = index">
       <td>
         <img
           *ngIf="row.logo | validateUrl"
@@ -32,8 +32,36 @@
           src="../assets/ellipsis-vertical.svg"
           height="20px"
           class="ellipsis-vertical"
+          (click)="
+            financialProducts[i].showMenu = !financialProducts[i].showMenu
+          "
         />
+        <div *ngIf="financialProducts[i].showMenu" class="menu-options">
+          <div (click)="onEdit(row)">Edit</div>
+          <div (click)="onDelete(row)">Delete</div>
+        </div>
       </td>
     </tr>
   </tbody>
 </table>
+<div class="pagination">
+<label for="select-pagination">{{ financialProducts.length }} Resultados</label>
+<select id="select-pagination" (change)="itemsToShow=$event.target?.['value']; updateProductsList();">
+  <option value="5">5</option>
+  <option value="10">10</option>
+  <option value="20">20</option>
+</select>
+</div>
+<dialog *ngIf="selectedToRemoveFinancialProduct" class="delete-dialog" open>
+  <p>
+    Estás seguro de Eliminar el producto
+    {{ selectedToRemoveFinancialProduct.name }}
+  </p>
+  <hr />
+  <div class="action-buttons">
+    <button class="reset" type="button" (click)="cancelDelete()">
+      Cancelar
+    </button>
+    <button class="send" type="submit">Confirmar</button>
+  </div>
+</dialog>
