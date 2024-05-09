@@ -1,5 +1,5 @@
 <div class="toolbar">
-  <input placeholder="Search..." />
+  <input [formControl]="searchControl" placeholder="Search..." />
   <button class="add" type="button" (click)="onAdd()">Agregar</button>
 </div>
 <table>
