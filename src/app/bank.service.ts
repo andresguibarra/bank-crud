@@ -30,7 +30,7 @@ export class BankService {
       .pipe(tap(console.log));
   }
 
-  createProduct(value: any): Observable<FinancialProduct[]> {
+  createProduct(value: any): Observable<void> {
     return this.httpClient
       .post<FinancialProduct[]>(this.baseUrl + "/bp/products", value, {
         headers: this.headers
@@ -38,7 +38,7 @@ export class BankService {
       .pipe(tap(console.log));
   }
 
-  updateProduct(value: any): Observable<FinancialProduct[]> {
+  updateProduct(value: any): Observable<void> {
     return this.httpClient
       .put<FinancialProduct[]>(this.baseUrl + "/bp/products", value, {
         headers: this.headers
@@ -46,7 +46,7 @@ export class BankService {
       .pipe(tap(console.log));
   }
 
-  deleteProduct(id: string | number): Observable<boolean> {
+  deleteProduct(id: string | number): Observable<boolean | null> {
     return this.httpClient
       .delete(this.baseUrl + "/bp/products", {
         headers: this.headers,

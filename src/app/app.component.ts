@@ -14,8 +14,7 @@ import { ValidateUrlPipe } from "./valid-url.pipe";
   providers: [BankService]
 })
 export class AppComponent implements OnInit {
-  financialProducts: FinancialProduct[] = [];
-  constructor(readonly bankService: BankService,  protected router: Router) {}
+  constructor(readonly bankService: BankService, protected router: Router) {}
 
   ngOnInit(): void {}
 }
