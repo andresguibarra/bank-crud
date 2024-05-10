@@ -37,8 +37,8 @@
           "
         />
         <div *ngIf="financialProducts[i].showMenu" class="menu-options">
-          <div (click)="onEdit(row)">Edit</div>
-          <div (click)="onDelete(row)">Delete</div>
+          <div class="menu-item" (click)="onEdit(row)">Edit</div>
+          <div class="menu-item" (click)="onDelete(row)">Delete</div>
         </div>
       </td>
     </tr>
@@ -62,6 +62,6 @@
     <button class="reset" type="button" (click)="cancelDelete()">
       Cancelar
     </button>
-    <button class="send" type="submit">Confirmar</button>
+    <button class="send" type="button" (click)="confirmDelete()">Confirmar</button>
   </div>
 </dialog>

@@ -7,8 +7,11 @@
         <label for="id">ID</label>
         <input type="text" id="id" formControlName="id" />
         <div *ngIf="productForm.get('id')?.touched">
+          <span *ngIf="productForm.get('id')?.errors?.['invalidId']"
+            >ID no válido</span
+          >
           <span *ngIf="productForm.get('id')?.errors?.['required']"
-            >ID no válido.</span
+            >El ID es requerido</span
           >
           <span *ngIf="productForm.get('id')?.errors?.['minlength']"
             >El ID debe tener al menos 3 caracteres.</span
@@ -82,7 +85,6 @@
           >
         </div>
       </div>
-      {{ productForm.getError("dateMismatch") }}
     </div>
     <div class="action-buttons">
       <button class="reset" type="button" (click)="onReset()">Reiniciar</button>

@@ -29,6 +29,13 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   constructor(readonly bankService: BankService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadFinancialProducts();
+    this.searchControl.valueChanges
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(this.onSearch.bind(this));
+  }
+
+  loadFinancialProducts(): void {
     this.bankService
       .getFinancialProducts()
       .pipe(take(1))
@@ -36,9 +43,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.fullFinancialProducts = financialProducts;
         this.updateProductsList();
       });
-    this.searchControl.valueChanges
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe(this.onSearch.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -79,6 +83,21 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     if (this.selectedToRemoveFinancialProduct) {
       this.selectedToRemoveFinancialProduct.showMenu = false;
       this.selectedToRemoveFinancialProduct = null;
+    }
+  }
+
+  confirmDelete(): void {
+    if (this.selectedToRemoveFinancialProduct) {
+      this.selectedToRemoveFinancialProduct.showMenu = false;
+      this.bankService
+        .deleteProduct(this.selectedToRemoveFinancialProduct.id)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.loadFinancialProducts();
+            this.selectedToRemoveFinancialProduct = null;
+          }
+        });
     }
   }
 }

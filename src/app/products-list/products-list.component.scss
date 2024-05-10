@@ -17,6 +17,8 @@
 
 table {
   width: 100%;
+  background: white;
+  padding: 20px;
   td {
     padding: 10px 0;
   }
@@ -30,11 +32,27 @@ table {
   fill: gray;
   color: gray;
 }
+.menu-options {
+  position: absolute;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 3px;
+}
+.menu-item {
+  cursor: pointer;
+  padding: 10px 20px;
+  &:hover {
+    background-color: rgb(236, 190, 91, 0.5);
+  }
+}
 
-.pagination { 
+.pagination {
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
+  background-color: white;
+  padding: 20px;
+
 }
 
 .delete-dialog {
@@ -60,4 +78,3 @@ table {
     }
   }
 }
-

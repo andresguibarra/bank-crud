@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { Observable, map, tap } from "rxjs";
 
 export type FinancialProduct = {
   id: string;
@@ -18,7 +18,7 @@ export class BankService {
   private baseUrl =
     "https://tribu-ti-staffing-desarrollo-afangwbmcrhucqfh.z01.azurefd.net/ipf-msa-productosfinancieros";
   private headers = {
-    authorId: "499"
+    authorId: "1"
   };
   constructor(private httpClient: HttpClient) {}
 
@@ -30,11 +30,37 @@ export class BankService {
       .pipe(tap(console.log));
   }
 
-  updateProduct(value: any) {
+  createProduct(value: any): Observable<FinancialProduct[]> {
     return this.httpClient
       .post<FinancialProduct[]>(this.baseUrl + "/bp/products", value, {
         headers: this.headers
       })
       .pipe(tap(console.log));
+  }
+
+  updateProduct(value: any): Observable<FinancialProduct[]> {
+    return this.httpClient
+      .put<FinancialProduct[]>(this.baseUrl + "/bp/products", value, {
+        headers: this.headers
+      })
+      .pipe(tap(console.log));
+  }
+
+  deleteProduct(id: string | number): Observable<boolean> {
+    return this.httpClient
+      .delete(this.baseUrl + "/bp/products", {
+        headers: this.headers,
+        params: { id },
+        responseType: "text"
+      })
+      .pipe(map((value)=> !!value));
+  }
+
+  validateProductExists(id: string | number): Observable<boolean> {
+    return this.httpClient
+      .get<boolean>(this.baseUrl + "/bp/products/verification", {
+        headers: this.headers,
+        params: { id }
+      })
   }
 }

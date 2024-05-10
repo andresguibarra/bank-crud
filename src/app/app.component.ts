@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from "@angular/router";
 import { BankService, FinancialProduct } from "./bank.service";
 import { HttpClientModule } from "@angular/common/http";
 import { CommonModule } from "@angular/common";
-import { take, takeUntil } from "rxjs";
 import { ValidateUrlPipe } from "./valid-url.pipe";
 
 @Component({
@@ -16,18 +15,7 @@ import { ValidateUrlPipe } from "./valid-url.pipe";
 })
 export class AppComponent implements OnInit {
   financialProducts: FinancialProduct[] = [];
-  constructor(readonly bankService: BankService) {}
+  constructor(readonly bankService: BankService,  protected router: Router) {}
 
-  ngOnInit(): void {
-    this.bankService
-      .getFinancialProducts()
-      .pipe(take(1))
-      .subscribe(
-        (financialProducts) => (this.financialProducts = financialProducts)
-      );
-  }
-
-  onAdd(): void {
-    
-  }
+  ngOnInit(): void {}
 }
